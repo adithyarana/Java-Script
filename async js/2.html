@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>chai or js </h1>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+    
+</body>
+
+<script>
+
+// set interval 
+
+const saydate = ((adi)=>{
+    console.log(adi,Date.now());
+    
+})
+
+ const intervalid= setInterval(saydate,1000,"hi")
+
+// give the code when i click start it run and when i click stop its shouls stop
+
+document.getElementById('start').addEventListener('click',()=>{
+    intervalid= setInterval(saydate,1000,"hi")
+})
+
+document.getElementById('stop').addEventListener('click',()=>{
+    clearInterval(intervalid)
+    console.log("stop");
+    
+})
+
+</script>
+</html>
