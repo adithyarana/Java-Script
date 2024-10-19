@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html events</title>
+</head>
+<body style="background-color: rgba(0, 0, 0, 0.562);">
+
+    <h2>amazing images</h2>
+
+    <ul id="images">
+        <li > <img id="owl" src="1_iWZmrTapDhmMugRBb7KE9w.jpg" alt="image1" height="300px" width="300px">image1</li>
+        <li><img src="adi.png" alt="" height="300px" width="300px">image2</li>
+        <li><img src="download.jpeg" alt="" height="300px" width="300px">image3</li>
+        <li><img src="ecommerce.webp" alt="" height="300px" width="300px" >image4</li>
+         <li><a href="https://www.google.com/">google</a></li>
+        
+    </ul>
+
+  
+    
+</body>
+
+<script>
+
+// this approch is not nice
+
+document.getElementById('owl').onclick = function(){
+    alert('You clicked on the owl image');
+}
+
+// better way to do it using event delegation
+
+document.getElementById('owl').addEventListener('click' , function(){
+    alert('You clicked on the owl image');
+}, false)
+
+// type , timestamp , defaultprevented ,
+// target , to element , srcelement , currenttarget
+// clientx , clint y , screenx , screeny
+// altkey , ctrljey , shiftkey , keycode 
+
+
+
+// bubble eevnts 
+
+document.getElementById('images').addEventListener('click',(e)=>{
+    
+        alert('You clicked on an image');
+}, false)
+
+document.getElementById('owl').addEventListener('click',(e)=>{
+  console.log("clicked inside the ul");
+  e.stopPropagation(); // stops the event from bubbling up to parent elements
+  
+}, false)
+
+document.getElementById('google').addEventListener('click', (e)=>{
+ 
+  e.preventDefault(); // stops the default action of the link (opening in new tab)  
+  console.log("google clicked");
+},false)
+
+
+// this is a small project to remove elemnt by clicking the images 
+
+
+document.querySelector('#images').addEventListener('click',(e)=>{
+
+console.log(e.target.tagName);
+
+if(e.target.tagName === 'IMG'){
+    alert('You clicked on an image');
+
+    let remove = e.target.parentNode
+     remove.remove()
+
+}
+
+
+
+},false)
+
+</script>
+</html>
