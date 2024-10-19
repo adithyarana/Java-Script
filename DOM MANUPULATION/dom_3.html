@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chai or code js </title>
+</head>
+<body style="background-color: rgba(0, 0, 0, 0.548); color: white;">
+
+
+<!-- //how to edit and remove elemnt in dom  -->
+
+<ul class="language">
+    <li>javascript</li>
+</ul>
+
+</body>
+
+
+
+<!-- how to add element in the dom  -->
+
+<script>
+    function addlanguage(langname){
+        const li = document.createElement('li')
+        li.innerHTML = `${langname}`
+        document.querySelector('.language').appendChild(li)
+
+    }
+
+    addlanguage("python")
+    addlanguage("java")
+    addlanguage("typescript")
+
+
+    // optimize way to add element in dom for bigger projeects 
+
+    function addoptilangauge(langname){
+        const li = document.createElement('li')
+        li.appendChild(document.createTextNode(langname))
+        document.querySelector('.language').appendChild(li)
+    }
+
+    addoptilangauge('golang')
+
+    // edit the elements 
+
+    const  secondlang= document.querySelector("li:nth-child(2)")
+    const newli= document.createElement('li')
+    newli.textContent="mojo"
+    secondlang.replaceWith(newli)
+
+    // edit 
+
+    const  firstlang= document.querySelector("li:first-child")
+    firstlang.outerHTML= '<li> typescript</li>'
+
+
+    // remove element 
+
+    const  thirdlang= document.querySelector("li:last-child")
+    thirdlang.remove()
+
+</script>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  
+    <title>DOM learning</title>
+
+    <style>
+        .bg-black{
+            background-color: rgba(0, 0, 0, 0.616);
+             color: white;
+        body{
+            background-color: rgba(0, 0, 0, 0.61);
+        }
+          
+        }
+    </style>
+</head>
+<body style="background-color: rgba(0, 0, 0, 0.671); color: white;">
+
+     <!-- <div class="bg-black">
+        <h1 id="title" class="heading">fom learning on chai  or code  <span style="display: none;">text hello</span> </h1>
+         
+        <h1>Lorem ipsum dolor sit amet.</h1>
+        <h1>Lorem ipsum dolor sit amet.</h1>
+        <h1>Lorem ipsum dolor sit amet.</h1>
+        <h1>Lorem ipsum dolor sit amet.</h1>
+        <h1>Lorem ipsum dolor sit amet.</h1>
+        <p>Lorem ipsum dolor sit amet.</p>
+     </div>
+
+     <ul>
+        <li class="list-item">one</li>
+        <li class="list-item">two</li>
+        <li class="list-item">three</li>
+        <li class="list-item">four</li>
+        <li class="list-item">five</li>
+    </ul> -->
+
+    //*/*******************************************************************
+
+
+    // how to create a new element in the dom
+
+    <div class="parent">
+        <div class="day">monday</div>
+        <div class="day">tuesday</div>
+        <div class="day">wednesday</div>
+        <div class="day">thursday</div>
+    </div>
+
+    <script>
+
+ const parent = document.querySelector('.parent')
+ console.log(parent);
+ console.log(parent.children);
+ console.log(parent.children[1].innerHTML);
+
+ for (let i = 0; i < parent.children.length; i++) {
+      console.log(parent.children[i].innerHTML);
+    
+ }
+
+ parent.children[1].style.color = "orange"
+ console.log(parent.firstElementChild);
+ console.log(parent.lastElementChild);
+ 
+ 
+ const dayone = document.querySelector('.day')
+ console.log(dayone);
+ console.log(dayone.parentElement);
+ console.log(dayone.nextElementSibling);
+
+ console.log("nodes:", parent.childNodes); // this important in react 
+ 
+ 
+
+    </script>
+    
+    
+</body>
+</html>
