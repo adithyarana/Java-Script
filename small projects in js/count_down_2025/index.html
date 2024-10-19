@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coutn_down_till 2025</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .count_down_{
+            text-align: center;
+        }
+
+        .count_down_timer {
+            font-size: 50px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .count_down_lable {
+            font-size: 20px;
+            color: #666;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.5s ease;
+            :hover {
+                color: #337ab7;
+            }
+            :active {
+                color: #23527c;
+            }
+            :focus {
+                outline: none;
+            }
+            :disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+        }
+
+
+       
+    </style>
+</head>
+<body>
+
+   <div class="count_down">
+    <div class="count_down_timer" id="count_down"></div>
+    <div class="count_down_lable">
+        until 2025
+    </div>
+   </div>
+    
+</body>
+
+<script>
+
+    // this is the progra, to print the count_down tilll 2025
+
+    const target_date = new Date('2025-01-01T00:00:00')
+
+ function updatecountdown(){
+    const now = new Date();
+    const distance = target_date - now; // this is differnence date 
+
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000)
+
+    document.getElementById('count_down').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
+    setInterval(updatecountdown ,1000)
+ }
+
+ updatecountdown()
+
+</script>
+</html>

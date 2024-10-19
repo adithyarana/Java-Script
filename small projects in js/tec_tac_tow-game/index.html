@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic Tac Toe</title>
+<style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 10px;
+      background-color: #444;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    .cell:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background-color: #f7f7f7;
+    }
+
+    .cell.clicked {
+      background-color: #dedede;
+      cursor: not-allowed;
+    }
+
+    .cell.X {
+      color: #ff4757;
+      animation: fadeInX 0.5s ease-in-out;
+    }
+
+    .cell.O {
+      color: #1e90ff;
+      animation: fadeInO 0.5s ease-in-out;
+    }
+
+    @keyframes fadeInX {
+      0% { opacity: 0; transform: rotate(90deg); }
+      100% { opacity: 1; transform: rotate(0); }
+    }
+
+    @keyframes fadeInO {
+      0% { opacity: 0; transform: scale(0); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes winnerGlow {
+      0% { background-color: #fff; }
+      50% { background-color: #ffeaa7; }
+      100% { background-color: #fff; }
+    }
+
+    .winner {
+      animation: winnerGlow 1s ease-in-out infinite;
+    }
+
+    .tie-message {
+      font-size: 1.5rem;
+      color: #2d3436;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="board"></div>
+<script>
+
+  const board = document.querySelector('.board');
+  let currentPlayer = 'X';
+  let winner = null;
+  const cells = Array.from({ length: 9 }).fill(null);
+
+  function checkWinner() {
+    const winningConditions = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+      [0, 4, 8], [2, 4, 6]             // diagonals
+    ];
+
+    for (let condition of winningConditions) {
+      const [a, b, c] = condition;
+      if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
+        return cells[a];
+      }
+    }
+
+    return null;
+  }
+
+  function handleCellClick(index) {
+    if (winner || cells[index]) return;
+
+    cells[index] = currentPlayer;
+    render();
+
+    winner = checkWinner();
+
+    if (winner) {
+      setTimeout(() => {
+        alert(`Player ${winner} wins!`);
+        resetGame();
+      }, 100);
+    } else if (!cells.includes(null)) {
+      setTimeout(() => {
+        alert("It's a tie!");
+        resetGame();
+      }, 100);
+    } else {
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+  }
+
+  function render() {
+    board.innerHTML = '';
+    cells.forEach((value, index) => {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.textContent = value || '';
+      cell.addEventListener('click', () => handleCellClick(index));
+      board.appendChild(cell);
+    });
+  }
+
+  function resetGame() {
+    cells.fill(null);
+    currentPlayer = 'X';
+    winner = null;
+    render();
+  }
+
+  render();
+
+</script>
+</body>
+</html>
+
+

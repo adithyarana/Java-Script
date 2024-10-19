@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPENSE TRACKER </title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0c0c1a85;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    h3 {
+        margin-top: 30px;
+        color: #444;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f4f4f9;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            padding: 10px;
+        }
+
+        table, th, td {
+            font-size: 14px;
+        }
+
+        button {
+            font-size: 14px;
+        }
+    }
+</style>
+<body>
+
+    <div class="container">
+
+        <h1>Expense Tracker</h1>
+        <form  id="expense_form">
+            <input type="text" id="description" placeholder="Expense description"
+            required/>
+
+            <br>
+
+            <select name="" id="category" required>
+                <option value="">select category</option>
+                <option value="food">food</option>
+                <option value="transportation">transportation</option>
+                <option value="utilities">utilities</option>
+                <option value="entertainment">entertainment</option>
+                <option value="other">others</option>
+            </select>
+
+            <br>
+
+            <input type="number" id="amount" placeholder="Amount" required/>
+              
+            <br>
+
+            <button type="submit">Add Expense</button>
+        </form>
+
+        <h3>EXPENSE summary</h3>
+        <table id="expense_table">
+            <thead>
+                <tr></tr>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="expensive_list">
+
+             
+
+            </tbody>
+
+        </table>
+
+        
+       
+
+    </div>
+    
+</body>
+
+<script>
+    const expense_form = document.getElementById('expense_form')
+    const expensive_list = document.getElementById('expensive_list')
+
+    expense_form.addEventListener('submit', (e)=>{
+       e.preventDefault();
+
+       const description = document.getElementById('description').value;
+       const category = document.getElementById('category').value;
+       const amount = document.getElementById('amount').value;
+
+       if(document && category && !isNaN(amount)){
+
+        const new_row = document.createElement('tr')
+
+        new_row.innerHTML = `
+        <td>${description}</td>
+        <td>${category}</td>
+        <td>${amount}</td>
+        <td><button class="delete-btn">Delete</button></td>
+        `
+
+        expensive_list.appendChild(new_row)
+
+         // to refresh the data after clicking the add expense button
+
+       document.getElementById('description').value=''
+       document.getElementById('category').value=''
+       document.getElementById('amount').value=''
+
+        // Add event listener for the delete button in the current row
+
+        new_row.querySelector('.delete-btn').addEventListener('click',()=>{
+            expensive_list.removeChild(new_row);
+        })
+
+       }else{
+        alert('Please fill all the required fields')
+       }
+
+      
+    });
+
+</script>
+</html>

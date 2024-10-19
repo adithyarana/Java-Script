@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keylogger Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Keylogger Demo</h1>
+  <p>Press the "Start" button to begin logging keystrokes. Press "Stop" to halt.</p>
+
+  <button id="startBtn">Start Logging</button>
+  <button id="stopBtn">Stop Logging</button>
+
+  <script>
+    let logging = false;
+
+    // Start logging keystrokes
+    document.getElementById('startBtn').addEventListener('click', function() {
+      logging = true;
+      console.log("Keylogger started...");
+    });
+
+    // Stop logging keystrokes
+    document.getElementById('stopBtn').addEventListener('click', function() {
+      logging = false;
+      console.log("Keylogger stopped.");
+    });
+
+    // Log keystrokes when typing
+    document.addEventListener('keydown', function(event) {
+      if (logging) {
+        console.log(`Key pressed: ${event.key}`);
+      }
+    });
+  </script>
+
+</body>
+</html>
